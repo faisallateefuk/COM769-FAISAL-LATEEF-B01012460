@@ -1,6 +1,7 @@
 // backend/src/videos.routes.js
 const express = require('express');
 const Video = require('../models/video_model');
+const multer = require('multer');
 const { uploadVideoBuffer } = require('../helper/storage');
 
 const router = express.Router();

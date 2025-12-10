@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const API_BASE =
-    import.meta.env.VITE_API_BASE || "http://localhost:4000";
+    import.meta.env.VITE_API_BASE || "https://com769-b01012460-staging.azurewebsites.net";
 
 export default function VideoUpload({ onUploaded }) {
     const [title, setTitle] = useState("");
