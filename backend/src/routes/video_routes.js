@@ -3,6 +3,7 @@ const express = require('express');
 const Video = require('../models/video_model');
 const multer = require('multer');
 const { uploadVideoBuffer } = require('../helper/storage');
+const { extractKeyPhrases } = require("../helper/textAnalytics");
 
 const router = express.Router();
 const upload = multer();
@@ -56,13 +57,22 @@ router.post('/upload', upload.single('file'), async (req, res) => {
             req.file.mimetype
         );
 
+        // Call Azure Language to get tags from title + description
+        let tags = [];
+        try {
+            const textForAI = `${title}\n${description || ""}`;
+            tags = await extractKeyPhrases(textForAI);
+        } catch (e) {
+            console.error("Text Analytics failed:", e.message);
+        }
+
         const video = await Video.create({
             title,
             description,
             uploaderId,
             blobUrl,
             thumbnailUrl: null,
-            tags: []
+            tags
         });
 
         res.status(201).json(video);

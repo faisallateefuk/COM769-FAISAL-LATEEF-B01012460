@@ -63,6 +63,27 @@ function VideoList() {
                         <p style={{ marginTop: 8 }}>
                             Likes: {v.likes ?? 0}
                         </p>
+                        {Array.isArray(v.tags) && v.tags.length > 0 && (
+                            <p style={{ marginTop: 4 }}>
+                                <strong>Tags:</strong>{" "}
+                                {v.tags.map((t) => (
+                                    <span
+                                        key={t}
+                                        style={{
+                                            display: "inline-block",
+                                            padding: "2px 6px",
+                                            marginRight: 4,
+                                            marginTop: 4,
+                                            borderRadius: 12,
+                                            border: "1px solid #ccc",
+                                            fontSize: "0.8rem",
+                                        }}
+                                    >
+                                        {t}
+                                    </span>
+                                ))}
+                            </p>
+                        )}
                     </div>
                 ))}
             </section>
