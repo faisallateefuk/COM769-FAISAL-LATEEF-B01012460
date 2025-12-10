@@ -21,6 +21,16 @@ function VideoList() {
         }
     };
 
+    const handleLike = async (id) => {
+        try {
+            await axios.post(`${API_BASE}/api/videos/${id}/like`);
+            // reload list to update likes
+            await loadVideos();
+        } catch (err) {
+            console.error("Failed to like video", err);
+        }
+    };
+
     useEffect(() => {
         loadVideos();
     }, []);
@@ -60,9 +70,22 @@ function VideoList() {
                             />
                         )}
 
-                        <p style={{ marginTop: 8 }}>
-                            Likes: {v.likes ?? 0}
-                        </p>
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <p style={{ marginTop: 8 }}>
+                                Likes: {v.likes ?? 0}{" "}
+                                <button
+                                    onClick={() => handleLike(v._id)}
+                                    style={{ marginLeft: 8, padding: "2px 8px", cursor: "pointer" }}
+                                >
+                                    👍 Like
+                                </button>
+                            </p>
+
+                            <p style={{ marginTop: 8 }}>
+                                Likes: {v.likes ?? 0}
+                            </p>
+
+                        </div>
                         {Array.isArray(v.tags) && v.tags.length > 0 && (
                             <p style={{ marginTop: 4 }}>
                                 <strong>Tags:</strong>{" "}
