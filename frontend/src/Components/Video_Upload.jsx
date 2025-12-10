@@ -1,4 +1,3 @@
-// frontend/src/VideoUpload.jsx
 import { useState } from "react";
 import axios from "axios";
 
@@ -8,7 +7,7 @@ const API_BASE =
 export default function VideoUpload({ onUploaded }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [uploaderId, setUploaderId] = useState("maxi"); // or leave blank
+    const [uploaderId, setUploaderId] = useState("");
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -47,12 +46,10 @@ export default function VideoUpload({ onUploaded }) {
             );
             setSuccess("Video uploaded successfully!");
 
-            // Clear form
             setTitle("");
             setDescription("");
             setFile(null);
 
-            // Let parent refresh list
             if (onUploaded) onUploaded(res.data);
         } catch (err) {
             console.error(err);

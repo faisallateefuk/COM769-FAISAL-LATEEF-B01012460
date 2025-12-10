@@ -2,7 +2,7 @@ const { BlobServiceClient } = require('@azure/storage-blob');
 const { v4: uuidv4 } = require('uuid');
 
 const connectionString = process.env.STORAGE_CONN_STRING;
-const containerName = 'videos'; // make sure this container exists
+const containerName = 'videos';
 
 if (!connectionString) {
     console.warn('WARNING: STORAGE_CONN_STRING is not set');

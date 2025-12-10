@@ -24,7 +24,6 @@ function VideoList() {
     const handleLike = async (id) => {
         try {
             await axios.post(`${API_BASE}/api/videos/${id}/like`);
-            // reload list to update likes
             await loadVideos();
         } catch (err) {
             console.error("Failed to like video", err);
@@ -37,9 +36,7 @@ function VideoList() {
 
     return (
         <div style={{ maxWidth: 900, margin: "0 auto", padding: 16 }}>
-            <h1>ClipCloud</h1>
-            <p>Mini TikTok-style video feed (staging)</p>
-
+            <h1>Mini TikTok-style</h1>
             <VideoUpload onUploaded={loadVideos} />
 
             <section>
@@ -61,7 +58,6 @@ function VideoList() {
                         <h3>{v.title}</h3>
                         {v.description && <p>{v.description}</p>}
 
-                        {/* Video playback */}
                         {v.blobUrl && (
                             <video
                                 src={v.blobUrl}
@@ -72,7 +68,6 @@ function VideoList() {
 
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <p style={{ marginTop: 8 }}>
-                                Likes: {v.likes ?? 0}{" "}
                                 <button
                                     onClick={() => handleLike(v._id)}
                                     style={{ marginLeft: 8, padding: "2px 8px", cursor: "pointer" }}
