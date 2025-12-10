@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use('/api/videos', videoRoutes);
 
+app.get("/", (req, res) => {
+    res.status(200).send("Yayyyy i am working!")
+})
+
 const PORT = process.env.PORT || 4000;
 
 async function start() {
