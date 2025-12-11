@@ -12,9 +12,9 @@ app.use(express.json());
 
 app.use('/api/videos', videoRoutes);
 
-app.get("/", (req, res) => {
-    res.status(200).send("Yayyyy i am working!")
-})
+app.get("/health", (req, res) => {
+    res.json({ status: "ok", time: new Date().toISOString() });
+});
 
 const PORT = process.env.PORT || 4000;
 
