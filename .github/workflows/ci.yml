@@ -12,23 +12,39 @@ jobs:
     defaults:
       run:
         working-directory: backend
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
-      - run: npm test"
+
+      - name: Install deps (backend)
+        run: npm install
+
+      - name: Run backend tests
+        run: npm test
 
   frontend-build:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
-      - run: npm run build
+
+      - name: Install deps (frontend)
+        run: npm install
+
+      - name: Build frontend
+        run: npm run build
