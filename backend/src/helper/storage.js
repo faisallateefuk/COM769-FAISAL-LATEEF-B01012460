@@ -1,5 +1,5 @@
 const { BlobServiceClient } = require('@azure/storage-blob');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require("crypto");
 
 const connectionString = process.env.STORAGE_CONN_STRING;
 const containerName = 'videos';
@@ -20,7 +20,7 @@ async function uploadVideoBuffer(buffer, originalName, mimeType) {
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
     const ext = originalName.split('.').pop() || 'mp4';
-    const blobName = `${uuidv4()}.${ext}`;
+    const blobName = `${randomUUID()}.${ext}`;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
     await blockBlobClient.uploadData(buffer, {
