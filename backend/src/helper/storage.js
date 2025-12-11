@@ -4,7 +4,7 @@ const { randomUUID } = require("crypto");
 const connectionString = process.env.STORAGE_CONN_STRING;
 const containerName = 'videos';
 
-if (!connectionString) {
+if (!connectionString && process.env.NODE_ENV !== "test") {
     console.warn('WARNING: STORAGE_CONN_STRING is not set');
 }
 
